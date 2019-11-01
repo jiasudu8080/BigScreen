@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>灞桥区决策分析系统</title>
+     <link rel="stylesheet" href="css/juece.css">
+     <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+     <script type="text/javascript" src="js/echarts4.min.js"></script>
+     <script type="text/javascript" src="js/juece.js"></script>
+     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=39b5eb8bb91adccfa6487135d960a1e8"></script>
+     <script type="text/javascript" src="http://api.map.baidu.com/library/InfoBox/1.2/src/InfoBox.js"></script>
+     <script type="text/javascript" src="js/bmap.js?v=20170921"></script>
+     <script type="text/javascript">
+         <!--
+         $(window).resize(function ()// 绑定到窗口的这个事件中
+         {
+             // var whdef = 100/1920;// 表示1920的设计图,使用100PX的默认值
+             var whdef = 100/916;// 表示1920的设计图,使用100PX的默认值
+             var wH = window.innerHeight;// 当前窗口的高度
+             var wW = window.innerWidth;// 当前窗口的宽度
+             // var rem = wW * whdef;// 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
+             var rem = wH * whdef;// 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
+             $('html').css('font-size', rem + "px");
+             myChart1.resize();
+             myChart2.resize();
+             myChart3.resize();
+             myChart4.resize();
+         });
+         //-->
+     </script>
+ </head>
+ <body>
+ <div class="container">
+     <header><div class="herder_bg"></div>
+         <a id="switch_btn"  href="tongji.html"></a>
+     </header>
+     <article>
+         <div id="hideleft"></div>
+
+         <div id="hideright"></div>
+
+
+         <div class="wrap">
+             <div  class="center">
+                 <div id="map" style="width: 98%;height: 97%;    margin-left: 1%;top: 1.5%;"></div>
+             </div>
+         </div>
+
+
+         <div class="left_margin  box-div">
+             <div class="sun-div">
+                 <div class="sun-title"><span class="">办学性质分布</span></div>
+                 <div id="ec1" class="left-ec" ></div>
+             </div>
+             <div class="sun-div">
+                 <div class="sun-title"><span class="">机构数量变化趋势</span></div>
+                 <div id="ec2" class="left-ec"></div>
+             </div>
+             <div  class="sun-div div_btm">
+                 <div class="sun-title"><span class="">建设目标达成情况</span></div>
+                 <div id="ec3" class="left-ec" ></div>
+             </div>
+         </div>
+
+
+         <div class="right_margin box-div">
+             <div class="sun-div" >
+                 <ul class="">
+                     <li>
+                         <div class="bar7">
+                             <input id="seName"  name="seName" type="text" placeholder="输入要查找的名称...">
+                             <button type="button" onclick="searchDate()"></button>
+                         </div>
+                     </li>
+                     <li>
+                         行业类型：
+                         <select  id="seType" name="seType" >
+                             <option value="0" selected>教育</option>
+                             <option value="1">医疗</option>
+                         </select>
+                         机构类别：<select id="seDj" name="seDj" onchange="searchDate()">
+                         <option value="" selected>请选择</option>
+                         <option value="3" >高中</option>
+                         <option value="2">初中</option>
+                         <option value="1">小学</option>
+                         <option value="0" >幼儿园</option>
+                     </select>
+                     </li>
+                     <li>
+                         <input id="radio1" type="radio" class="rdo" name="seZT" value="正常" onclick="searchDate()"> 正常
+                         <input id="radio2" type="radio" class="rdo" name="seZT" value="停业" onclick="searchDate()" >停业
+                         <input id="radio3" type="radio" class="rdo" name="seZT" value="注销" onclick="searchDate()">注销
+                     </li>
+                     <li id="slexz">
+                         <input type="radio" class="rdo" name="seXz" onclick="searchDate()" value="教育部门" > 教育部门
+                         <input type="radio" class="rdo" name="seXz" onclick="searchDate()" value="民办">民办
+                         <input type="radio" class="rdo" name="seXz" onclick="searchDate()"  value="地方企业"> 地方企业
+                         <input type="radio" class="rdo" name="seXz" onclick="searchDate()" value="事业单位"> 事业单位
+                     </li>
+                     <li><span class="title1">符合结果的单位共有：<font  id="sumNum" color="#ffd700">0</font> 家</span></li>
+                 </ul>
+             </div>
+             <div class="sun-div">
+                 <div class="sun-title"><span class="">办学性质分布</span></div>
+                 <ul class="data-contents-height" id="jlTop">
+                     <li><b>1</b><b class="litext" title="灞桥天骄幼儿园">灞桥天骄幼儿园</b>
+                         <span class="r unchanged"><strong>155m</strong></span><span class="r unchanged1">
+			  民办</span></li>
+                     <li><b>2</b><b class="litext" title="星海柏林阳光幼儿园">星海柏林阳光幼儿园</b>
+                         <span class="r unchanged"><strong>385m</strong></span><span class="r unchanged1">
+			 教育部门</span></li>
+                     <li><b>3</b><b class="litext" title="灞桥区小天鹅幼儿园">灞桥区小天鹅幼儿园</b>
+                         <span class="r unchanged"><strong>885m</strong></span><span class="r unchanged1">
+			  地方企业</span></li>
+                     <li><b>4</b><b class="litext" title="灞桥区白鹿幼儿园">灞桥区白鹿幼儿园</b>
+                         <span class="r unchanged"><strong>885m</strong></span><span class="r unchanged1">
+			  事业单位</span></li>
+                     <li><b>5</b><b class="litext" title="灞桥区白红太阳幼儿园">灞桥区白红太阳幼儿园</b>
+                         <span class="r unchanged"><strong>1km</strong></span><span class="r unchanged1">
+			  民办</span></li>
+                 </ul>
+             </div>
+             <div class="sun-div div_btm">
+                 <div class="sun-title"><span class="">办学性质分布</span></div>
+                 <ul class="data-contents-height" id="gmTop">
+                     <li><b>1</b>
+                         <b class="litext" title="灞桥天骄幼儿园">灞桥天骄幼儿园</b>
+                         <span class="r unchanged"><strong>300</strong></span><span class="r unchanged1">
+			  民办</span></li>
+                     <li><b>2</b><b class="litext" title="星海柏林阳光幼儿园">星海柏林阳光幼儿园</b>
+                         <span class="r unchanged"><strong>480</strong></span><span class="r unchanged1">
+			 教育部门</span></li>
+                     <li><b>3</b><b class="litext" title="灞桥区白鹿幼儿园">灞桥区小天鹅幼儿园</b>
+                         <span class="r unchanged"><strong>450</strong></span><span class="r unchanged1">
+			  地方企业</span></li>
+                     <li><b>4</b><b class="litext" title="灞桥区白鹿幼儿园">灞桥区白鹿幼儿园</b>
+                         <span class="r unchanged"><strong>450</strong></span><span class="r unchanged1">
+			  事业单位</span></li>
+                     <li><b>5</b><b class="litext" title="灞桥区白红太阳幼儿园">灞桥区白红太阳幼儿园</b>
+                         <span class="r unchanged"><strong>300</strong></span><span class="r unchanged1">
+			  民办</span></li>
+                 </ul>
+             </div>
+         </div>
+     </article>
+ </div>
+ <script type="text/javascript">
+     var myChart1 = echarts.init(document.getElementById('ec1'));
+     var myChart2 = echarts.init(document.getElementById('ec2'));
+     var myChart3 = echarts.init(document.getElementById('ec3'));
+
+     $(function () {
+         $("#hideleft").toggle(
+             function(){
+                 $(".left_margin").animate({marginLeft:"-125%"});
+                 $(".wrap").animate({marginLeft:0});
+                 $(".center").animate({marginLeft:0});
+             },
+             function(){
+                 $(".center").animate({marginLeft:"25%"});
+                 $(".left_margin").animate({marginLeft:"-100%"});
+             }
+         );
+         $("#hideright").toggle(
+             function(){
+                 $(".right_margin").animate({marginRight:"-125%"});
+                 $(".wrap").animate({marginRight:0});
+                 $(".center").animate({marginRight:0});
+             },
+             function(){
+                 $(".center").animate({marginRight:"25%"});
+                 $(".right_margin").animate({marginLeft:"-25%"});
+             }
+         );
+     });
+ </script>
+ </body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>灞桥区统计分析系统</title>
+      <link rel="stylesheet" href="css/tongji.css">
+     <link rel="stylesheet" href="css/progresscircle.css">
+     <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
+     <script type="text/javascript" src="js/echarts4.min.js"></script>
+     <script type="text/javascript" src="js/tongji.js"></script>
+     <script type="text/javascript" src="js/progresscircle.js"></script>
+     <script type="text/javascript">
+         <!--
+         $(window).resize(function ()// 绑定到窗口的这个事件中
+         {
+             // var whdef = 100/1920;// 表示1920的设计图,使用100PX的默认值
+             var whdef = 100/916;// 表示1920的设计图,使用100PX的默认值
+             var wH = window.innerHeight;// 当前窗口的高度
+             var wW = window.innerWidth;// 当前窗口的宽度
+             // var rem = wW * whdef;// 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
+             var rem = wH * whdef;// 以默认比例值乘以当前窗口宽度,得到该宽度下的相应FONT-SIZE值
+             $('html').css('font-size', rem + "px");
+             myChart1.resize();
+             myChart2.resize();
+             myChart3.resize();
+             myChart4.resize();
+         });
+         //-->
+     </script>
+ </head>
+ <body>
+ <div class="container">
+     <header><div class="herder_bg"></div>
+         <a id="switch_btn"  href="juece.html"></a>
+     </header>
+     <article>
+         <div class="wrap">
+             <div  class="wrap-left">
+                 <div class="left-top sun-div">
+                     <div class="sun-title"><span class="">办件状态</span></div>
+                     <div class="left-top-ec">
+                         <span>当天实时</span> <span>全局工作统计</span>
+                        <!--统计图一-->
+                         <div id="ec1"  >
+                         </div>
+                         <!--统计图二-->
+                         <div id="ec2" >
+                         </div>
+                     </div>
+                 </div>
+                 <div class="left-btm sun-div">
+                     <div class="sun-title"><span class="">当前受理</span></div>
+                     <div class="notice">
+                         <ul>
+                             <li><b class="litext" title="关于XX申请筹建幼儿园">关于XX申请筹建幼儿园</b><span class="r">04-17 17:52</span></li>
+                             <li><b class="litext" title="关于XX申请筹建幼儿园">关于XX申请筹建幼儿园</b><span class="r">04-17 17:52</span></li>
+                             <li><b class="litext" title="关于XX申请筹建幼儿园">关于XX申请筹建幼儿园</b><span class="r">04-17 17:52</span></li>
+                             <li><b class="litext" title="关于XX申请筹建幼儿园">关于XX申请筹建幼儿园</b><span class="r">04-17 17:52</span></li>
+                             <li><b class="litext" title="关于XX申请筹建幼儿园">关于XX申请筹建幼儿园</b><span class="r">04-17 17:52</span></li>
+                             <li><b class="litext" title="关于XX申请筹建幼儿园">关于XX申请筹建幼儿园</b><span class="r">04-17 17:52</span></li>
+                             <li><b class="litext" title="关于XX申请筹建幼儿园">关于XX申请筹建幼儿园</b><span class="r">04-17 17:52</span></li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+             <div  class="wrap-right">
+                 <div class="right-top sun-div">
+                     <div class="sun-title"><span class="">办件量</span></div>
+                     <div id="data-list">
+                         <table style="width: 100%">
+                             <tr style="height: 0.5rem"><td style="text-align: center;width: 33%;font-size: 0.22rem">今日办件量</td><td style="text-align: center;width: 33%;font-size: 0.22rem">总办件量</td><td style="text-align: center;width: 33%;font-size: 0.22rem" >日均办件量</td></tr>
+                             <tr><td style="text-align:center"><div class="circlechart" data-percentage="-10">10/100</div></td>
+                                 <td style="text-align: center">  <div class="circlechart" data-percentage="78">55/500</div></td>
+                                 <td style="text-align: center">  <div class="circlechart" data-percentage="50">38/100</div></td></tr>
+                         </table>
+
+                     </div>
+                     <div id="ec3">
+                     </div>
+                 </div>
+                 <div class="right-btm">
+                     <div class="r-btm-left" >
+                         <div class="sun-title"><span class="">部门统计</span></div>
+                         <table class="ri-table">
+                             <tr ><td style="width: 40%;"><span style="color:#fda400;position: relative;">组别</span></td><td style="width: 30%;"><span style="color:#fda400">已完结</span></td><td style="width: 30%;"><span style="color:#fda400">未完结</span></td></tr>
+                             <tr><td>审批一组</td><td>155</td><td>188</td></tr>
+                             <tr><td>审批二组</td><td>254</td><td>122</td></tr>
+                             <tr><td>审批三组</td><td>3360</td><td>50</td></tr>
+                             <tr><td>审批四组</td><td>3360</td><td>50</td></tr>
+                         </table>
+                     </div>
+                     <div class="r-btm-righ">
+                         <div class="sun-title"><span class="">热门事项排行</span></div>
+                         <div id="ec4" >
+
+                         </div>
+                     </div>
+                 </div>
+
+             </div>
+         </div>
+     </article>
+ </div>
+ <script type="text/javascript">
+     var myChart1 = echarts.init(document.getElementById('ec1'));
+     var myChart2 = echarts.init(document.getElementById('ec2'));
+     var myChart3 = echarts.init(document.getElementById('ec3'));
+     var myChart4 = echarts.init(document.getElementById('ec4'));
+     /*
+      * 参数说明
+      * obj : 动画的节点，本例中是ul
+      * top : 动画的高度，本例中是-35px;注意向上滚动是负数
+      * time : 动画的速度，即完成动画所用时间，本例中是500毫秒，即marginTop从0到-35px耗时500毫秒
+      * function : 回调函数，每次动画完成，marginTop归零，并把此时第一条信息添加到列表最后;
+      *
+      */
+     function noticeUp(obj,top,time) {
+         $(obj).animate({
+             marginTop: top
+         }, time, function () {
+             $(this).css({marginTop:"0"}).find(":first").appendTo(this);
+         })
+     }
+     $(function () {
+         // 调用 公告滚动函数
+         setInterval("noticeUp('.notice ul','-35px',500)", 2000);
+     });
+     $('.circlechart').circlechart();
+ </script>
+ </body>
+</html>
